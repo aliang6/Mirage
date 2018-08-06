@@ -13,7 +13,7 @@ const RootStack = createStackNavigator(
     Landing: { screen: LandingPage },
     Options: { screen: OptionsPage },
     FriendSelect: { screen: FriendSelectPage },
-    BotSelectPage: { screen: BotSelectPage },
+    BotSelect: { screen: BotSelectPage },
     Chat: { screen: ChatPage },
     About: { screen: AboutPage },
   },
