@@ -26,6 +26,7 @@ The user logs in using their Facebook credentials. Afterwards, they are shown a 
 #### Back-End
 * Node.js
 * Express.js
+* Tensorflow
 * Facebook Graph API
 
 ## Planning
@@ -33,8 +34,10 @@ The user logs in using their Facebook credentials. Afterwards, they are shown a 
   - Monday August 6, 2018
     - Complete project setup
     - Add Facebook's Graph API and login
-  - Tuesday August 7, 2018
     - Setup the views
+  - Tuesday August 7, 2018
+    - Learn Tensorflow
+    - Setup machine learning models
   - Wednesday August 8, 2018
     - Setup front end to back end communication
   - Thursday August 9, 2018
