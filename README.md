@@ -32,14 +32,14 @@ The user logs in using their Facebook credentials. Afterwards, they are shown a 
 ## Planning
 - Week One
   - Monday August 6, 2018
-    - Complete project setup
-    - Add Facebook's Graph API and login
+    - Complete React Native and Express setup
     - Setup the views
+    - Setup front end to back end communication
   - Tuesday August 7, 2018
+    - Add Facebook's Graph API and login
+  - Wednesday August 8, 2018
     - Learn Tensorflow
     - Setup machine learning models
-  - Wednesday August 8, 2018
-    - Setup front end to back end communication
   - Thursday August 9, 2018
     - Front end design
   - Friday August 10, 2018
