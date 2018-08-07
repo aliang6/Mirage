@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+require('dotenv').config();
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var json = {
@@ -12,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var json = {
-    sent: true,
+    app_id: process.env.FB_APP_ID,
   };
   console.log(json);
   res.send(json);

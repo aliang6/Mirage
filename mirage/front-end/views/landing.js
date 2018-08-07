@@ -1,7 +1,25 @@
 import React from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
+import { Facebook } from 'expo';
 
-async function retrieveJSON() {
+var app_id = '';
+
+async function fbLogin(app_id) {
+  const { type, token } = await Facebook.logInWithReadPermissionsAsync(app_id, {
+      permissions: ['public_profile'],
+    });
+  if (type === 'success') {
+    // Get the user's name using Facebook's Graph API
+    const response = await fetch(
+      `https://graph.facebook.com/me?access_token=${token}`);
+    Alert.alert(
+      'Logged in!',
+      `Hi ${(await response.json()).name}!`,
+    );
+  }
+}
+
+async function retrieveAppId() {
   console.log('Retrieving JSON');
   await fetch('http://localhost:4000/login', { 
       method: 'POST',
@@ -11,11 +29,15 @@ async function retrieveJSON() {
     console.log(res);
     return res.json();
   }).then((json) => {
-    console.log(json);
+    app_id = json.app_id;
+    console.log(app_id);
+    fbLogin(app_id);
   }).catch((err) => {
     console.log(err);
   });
 }
+
+
 
 export default class LandingPage extends React.Component {
   constructor(props) {
@@ -27,11 +49,12 @@ export default class LandingPage extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Mirage</Text>
-        <Text>{process.env.FB_APP_ID}</Text>
+        <Text>{app_id}</Text>
         <Button
           title="Facebook Login"
           onPress={() => {
-            retrieveJSON(); 
+            retrieveAppId();
+            fbLogin(); 
             // this.props.navigation.navigate('Options')
           }}
           styles={styles.landingButtons}
