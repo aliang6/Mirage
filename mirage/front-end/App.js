@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import LandingPage from './views/landing.js';
 import OptionsPage from './views/options.js';
 import FriendSelectPage from './views/friend-select.js';
-import BotSelectPage from './views/bot-select.js';
+import NamePage from './views/name.js';
 import ChatPage from './views/chat.js';
 import AboutPage from './views/about.js';
 
@@ -13,7 +13,7 @@ const RootStack = createStackNavigator(
     Landing: { screen: LandingPage },
     Options: { screen: OptionsPage },
     FriendSelect: { screen: FriendSelectPage },
-    BotSelect: { screen: BotSelectPage },
+    Name: { screen: NamePage },
     Chat: { screen: ChatPage },
     About: { screen: AboutPage },
   },

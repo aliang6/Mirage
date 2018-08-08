@@ -1,5 +1,9 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { 
+  StyleSheet, 
+  Button, 
+  Text, 
+  View } from 'react-native';
 
 export default class OptionsPage extends React.Component {
   render() {
@@ -13,7 +17,7 @@ export default class OptionsPage extends React.Component {
         />
         <Button
           title="Talk with a Trained Chatbot"
-          onPress={() => this.props.navigation.navigate('BotSelect')}
+          onPress={() => this.props.navigation.navigate('Name')}
           styles={styles.landingButtons}
         />
       </View>

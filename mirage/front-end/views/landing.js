@@ -64,9 +64,9 @@ export default class LandingPage extends React.Component {
         <Button
           title="Facebook Login"
           onPress={() => {
-            retrieveAppId();
-            fbLogin(); 
-            // this.props.navigation.navigate('Options')
+            // retrieveAppId();
+            // fbLogin();
+            this.props.navigation.navigate('Options')
           }}
           styles={styles.landingButtons}
         />
