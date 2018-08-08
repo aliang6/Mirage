@@ -19,6 +19,7 @@ export default class NamePage extends React.Component {
   }
 
   onPress = () => {
+    console.log(this.state.name);
     this.props.navigation.navigate('Chat', {name: this.state.name})
   }
 
@@ -53,4 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  nameInput: {
+
+  }
 });
