@@ -4,17 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/login');
-
 var app = express();
 
 require('dotenv').config();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -22,9 +14,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/login', loginRouter);
+
+
+var access_token = '';
+
+// Send login app id
+app.post('/login', function(req, res, next) {
+  var json = {
+    app_id: process.env.FB_APP_ID,
+  };
+  console.log(json);
+  res.send(json);
+});
+
+// Save access token
+app.post('/token', function(req, res, next) {
+  access_token = req.body.access_token;
+  console.log(access_token);
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,7 +47,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.log('error');
 });
 
-module.exports = app;
+const port = process.env.PORT || 4000;
+app.listen(port);
