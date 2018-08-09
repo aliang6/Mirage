@@ -16,7 +16,7 @@ export default class OptionsPage extends React.Component {
           styles={styles.landingButtons}
         />
         <Button
-          title="Echo chamber"
+          title="Chat with a chatbot"
           onPress={() => this.props.navigation.navigate('Chat')}
           styles={styles.landingButtons}
         />

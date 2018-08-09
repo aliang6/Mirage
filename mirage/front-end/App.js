@@ -7,6 +7,7 @@ import IngredientPage from './views/ingredients.js';
 import NamePage from './views/name.js';
 import ChatPage from './views/chat.js';
 import AboutPage from './views/about.js';
+import { Font } from 'expo';
 
 const RootStack = createStackNavigator(
   {
@@ -23,6 +24,7 @@ const RootStack = createStackNavigator(
 );
 
 export default class App extends React.Component {
+
   render() {
     return (
       <RootStack />

@@ -44,13 +44,6 @@ const messages = new Messages(
   if(err) console.log(err);
 }); */
 
-Messages.findOne({ name: 'TestBot' }, function(err, messages) {
-  if (err) console.log(err);
-  else {
-    console.log(messages);
-  }
-});
-
 
 // Cleverbot.io setup
 var session_name = '';
@@ -64,8 +57,6 @@ var askCB = (message) => {
         reject('Response error');
       }
       else{
-        console.log('b');
-        console.log(response);
         resolve(response);
       }
     });
@@ -84,18 +75,47 @@ bot.create((err, sessionName) => {
 
 console.log(session_name);
 
+
+// POST - Client has sent a message; send response
 app.post('/api/ask', (req, res) => {
   console.log('Message sent');
-  const message = req.body.message;
+  const message = req.body.message.text;
   askCB(message).then((response) => {
     console.log(response);
     res.send({ response: response });
+    
+
   }).catch((err) => {
     console.log(err);
     res.send({ response: err });
   });
 });
 
+// POST - Return past messages array
+app.post('/api/past-messages', (req, res) => {
+  console.log('Past messages requested');
+  Messages.findOne({ name: 'TestBot' }, (err, response) => {
+    if (err) console.log(err);
+    else {
+      console.log(response);
+      console.log(response.messages);
+      res.send(response.messages);
+    }
+  });
+});
+
+// POST - Save new messages array
+app.post('/api/save-messages', (req, res) => {
+  console.log('Saving new messages');
+  const messages = req.body.messages;
+  console.log(messages);
+  Messages.findOneAndUpdate({ name: 'TestBot' }, {"messages": messages}, (err, response) => {
+    if (err) console.log(err);
+    else {
+      console.log(response);
+    }
+  });
+});
 
 /* var access_token = '';
 

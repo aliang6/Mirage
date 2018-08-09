@@ -1,6 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
+
+/*var past_messages = '';
+
+async function retrieveMessages() {
+  await fetch('http://localhost:4000/api/past-messages', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({}),
+  }).then((res) => {
+    return res.json;
+  }).then((json) => {
+    past_messages = json;
+  }).catch((err) => {
+    console.log(err);
+  });
+} */
+
 export default class ChatPage extends React.Component {
   static navigationOptions = ({navigation}) => ({
     title: 'Echo Chamber',
@@ -10,17 +27,27 @@ export default class ChatPage extends React.Component {
     messages: [],
   };
 
+  
+
   componentDidMount() {
-    /*console.log(this.props.navigation.getParam('name', 'User'));
-    Fire.shared.on((message) => {
-      this.setState((previousState) => ({
-        messages: GiftedChat.append(previousState.messages, message),
-      }));
-    }); */ 
+    fetch('http://localhost:4000/api/past-messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({}),
+    }).then((res) => {
+      console.log(res);
+      return res.json();
+    }).then((json) => {
+      this.setState({
+        messages: json,
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   componentWillMount() {
-    this.setState({
+    /* this.setState({
       messages: [
         {
           _id: 1,
@@ -33,11 +60,17 @@ export default class ChatPage extends React.Component {
           },
         },
       ]
-    })
+    }) */
   }
 
   componentWillUnmount() {
-    // Fire.shared.off();
+    fetch('http://localhost:4000/api/save-messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ messages: this.state.messages}),
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   get user() {
@@ -48,7 +81,7 @@ export default class ChatPage extends React.Component {
   }
 
   onSend(messages = []) {
-    const inputMessage = messages[0].text;
+    const inputMessage = messages[0];
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }));

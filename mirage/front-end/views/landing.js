@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
-import { Facebook } from 'expo';
+import { Font, Facebook } from 'expo';
 
 var app_id = '';
 var access_token = '';
@@ -56,27 +56,44 @@ export default class LandingPage extends React.Component {
     this.report = '';
   }
 
+  state = {
+    fontLoaded: false,
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'raleway': require('../assets/fonts/raleway/Raleway-Regular.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Mirage</Text>
-        <Text>{app_id}</Text>
-        <Button
-          title="Facebook Login"
-          onPress={() => {
-            // retrieveAppId();
-            // fbLogin();
-            this.props.navigation.navigate('Options')
-          }}
-          styles={styles.landingButtons}
-        />
-        <Button
-          title="How it works"
-          onPress={() => this.props.navigation.navigate('About')}
-          styles={styles.landingButtons}
-        />
+        <View style={styles.componentText}>
+          {
+            this.state.fontLoaded ? 
+            <Text style={styles.landingText}>Mirage</Text> : null
+          }
+        </View>
+        <View style={styles.componentButton}>
+          <Button
+            title="Get Started"
+            onPress={() => {
+              // retrieveAppId();
+              // fbLogin();
+              this.props.navigation.navigate('Options')
+            }}
+            style={styles.landingButtons}
+          />
+          {/* <Button
+            title="How it works"
+            onPress={() => this.props.navigation.navigate('About')}
+            styles={styles.landingButtons}
+          /> */}
+        </View>
       </View>
-    )
+    );
   }
 }
 
@@ -84,14 +101,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  componentText: {
+    flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    backgroundColor: 'powderblue',
+  },
+  componentButton: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'skyblue',
   },
   landingButtons: {
-    flex: 1,
-    color: '#fff',
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: 36,
+  },
+  landingText: {
+    fontFamily: 'raleway',
+    fontSize: 72,
   }
 });
