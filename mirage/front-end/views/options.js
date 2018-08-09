@@ -11,13 +11,13 @@ export default class OptionsPage extends React.Component {
       <View style={styles.container}>
         <Text>Options</Text>
         <Button
-          title="Train a Chatbot"
-          onPress={() => this.props.navigation.navigate('FriendSelect')}
+          title="Find recipes with available ingredients"
+          onPress={() => this.props.navigation.navigate('Ingredient')}
           styles={styles.landingButtons}
         />
         <Button
-          title="Talk with a Trained Chatbot"
-          onPress={() => this.props.navigation.navigate('Name')}
+          title="Echo chamber"
+          onPress={() => this.props.navigation.navigate('Chat')}
           styles={styles.landingButtons}
         />
       </View>

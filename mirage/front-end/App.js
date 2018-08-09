@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import LandingPage from './views/landing.js';
 import OptionsPage from './views/options.js';
-import FriendSelectPage from './views/friend-select.js';
+import IngredientPage from './views/ingredients.js';
 import NamePage from './views/name.js';
 import ChatPage from './views/chat.js';
 import AboutPage from './views/about.js';
@@ -12,7 +12,7 @@ const RootStack = createStackNavigator(
   {
     Landing: { screen: LandingPage },
     Options: { screen: OptionsPage },
-    FriendSelect: { screen: FriendSelectPage },
+    Ingredient: { screen: IngredientPage },
     Name: { screen: NamePage },
     Chat: { screen: ChatPage },
     About: { screen: AboutPage },

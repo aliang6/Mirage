@@ -1,6 +1,6 @@
-import React from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
+import React from 'react';
 import App from './App';
-import renderer from '../../../../../Library/Caches/typescript/2.9/node_modules/@types/react-test-renderer';
+import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {
   const rendered = renderer.create(<App />).toJSON();
