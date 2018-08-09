@@ -48,26 +48,37 @@ export default class ChatPage extends React.Component {
   }
 
   onSend(messages = []) {
-    console.log(messages);
-    /* var response = messages[0].text;
-    console.log(text); */
+    const inputMessage = messages[0].text;
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
-    }))
-
-    var message = {
-      _id: this.state.messages.length - 1,
-      text: 'I love you',
-      createdAt: new Date(),
-      user: {
-        _id: 2,
-        name: 'React Native',
-        avatar: 'https://www.ikea.com/PIAimages/0129203_PE283223_S5.JPG',
-      },
-    }
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, message),
-    }))
+    }));
+    fetch('http://localhost:4000/api/ask', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ message: inputMessage }),
+    }).then((res) => {
+      return res.json();
+    }).then((json) =>{
+      console.log(json);
+      console.log(json.response);
+      var message = {
+        _id: this.state.messages.length,
+        text: json.response,
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://www.ikea.com/PIAimages/0129203_PE283223_S5.JPG',
+        },
+      }
+      this.setState(previousState => ({
+        messages: GiftedChat.append(previousState.messages, message),
+      }));
+    }).catch((err) => {
+      console.log(err);
+    });
+    /* var response = messages[0].text;
+    console.log(text); */
   }
 
   
@@ -75,6 +86,7 @@ export default class ChatPage extends React.Component {
   render() {
     return (
       <GiftedChat
+        key={this.id}
         messages={this.state.messages}
         onSend={(messages) => {
           this.onSend(messages);

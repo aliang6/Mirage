@@ -5,8 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const Messages = require('./models/messages');
+const cleverbot = require("cleverbot.io");
 
-var app = express();
+const app = express();
 
 require('dotenv').config();
 
@@ -22,7 +23,6 @@ mongoose.connect(mongoURI, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
 
 const messages = new Messages(
   {
@@ -49,6 +49,51 @@ Messages.findOne({ name: 'TestBot' }, function(err, messages) {
   else {
     console.log(messages);
   }
+});
+
+
+// Cleverbot.io setup
+var session_name = '';
+
+var askCB = (message) => {
+  return new Promise ((resolve, reject) => {
+    bot.setNick(session_name);
+    bot.ask(message, (err, response) => {
+      if(err) {
+        console.log(err); 
+        reject('Response error');
+      }
+      else{
+        console.log('b');
+        console.log(response);
+        resolve(response);
+      }
+    });
+  });
+};
+
+var bot = new cleverbot(process.env.CB_USER, process.env.CB_KEY);
+bot.create((err, sessionName) => {
+  if(err) console.log(err);
+  else {
+    session_name = sessionName;
+    bot.setNick(sessionName);
+    askCB('Never going to give you up');
+  }
+});
+
+console.log(session_name);
+
+app.post('/api/ask', (req, res) => {
+  console.log('Message sent');
+  const message = req.body.message;
+  askCB(message).then((response) => {
+    console.log(response);
+    res.send({ response: response });
+  }).catch((err) => {
+    console.log(err);
+    res.send({ response: err });
+  });
 });
 
 
@@ -80,7 +125,6 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   console.log('error');
 });
