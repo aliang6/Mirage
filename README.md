@@ -1,21 +1,20 @@
 # Mirage
-Train a chatbot to talk like a friend
+Train a conversational chatbot
 
 ## Audience
-People who want to train a chatbot to talk like their friends, whether for sentimental reasons or for humor.
+People who want to train a chatbot
 
 ## Experience
-The user logs in using their Facebook credentials. Afterwards, they are shown a screen of people they have messages with. Picking one will train a bot with all the messages they've had with that person. After the training is complete, they will be able to talk to the bot like they would a real person. 
+The user enters the app and is immediately able to start conversing with the chatbot. The responses that they give will help to train the chatbot overall.
 
 # Technical
 ## Views
-- Home page with Facebook login prompt
-- Page with create and talk buttons
+- Home page
 - Conversation page
-- Potential people to train page
 
 ## Features
-- Training a bot to talk like a friend
+- Talking to a chatbot
+- Training the chatbot
 
 ## Languages
 #### Front-End
@@ -26,23 +25,19 @@ The user logs in using their Facebook credentials. Afterwards, they are shown a 
 #### Back-End
 * Node.js
 * Express.js
-* Tensorflow
-* Facebook Graph API
+* MongoDB
+* Mongoose
+* Superscript
 
 ## Planning
 - Week One
-  - Monday August 6, 2018
+  - Wednesday August 8, 2018
     - Complete React Native and Express setup
     - Setup the views
     - Setup front end to back end communication
-  - Tuesday August 7, 2018
-    - Add Facebook's Graph API and login
-  - Wednesday August 8, 2018
-    - Learn Tensorflow
-    - Setup machine learning models
   - Thursday August 9, 2018
-    - Front end design
+    - MongoDB and Superscript setup
   - Friday August 10, 2018
-    - Refine design
+    - Front end design and refining
   - Saturday August 11, 2018
     - Demo
