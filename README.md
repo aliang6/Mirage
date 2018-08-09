@@ -1,11 +1,5 @@
 # Mirage
-Train a conversational chatbot
-
-## Audience
-People who want to train a chatbot
-
-## Experience
-The user enters the app and is immediately able to start conversing with the chatbot. The responses that they give will help to train the chatbot overall.
+Talk with a conversational chatbot
 
 # Technical
 ## Views
@@ -14,7 +8,7 @@ The user enters the app and is immediately able to start conversing with the cha
 
 ## Features
 - Talking to a chatbot
-- Training the chatbot
+- (Future) Specialized chatbots
 
 ## Languages
 #### Front-End
@@ -22,12 +16,13 @@ The user enters the app and is immediately able to start conversing with the cha
 * CSS
 * JavaScript
 * React Native
+* React Navigator
 #### Back-End
 * Node.js
 * Express.js
 * MongoDB
 * Mongoose
-* Superscript
+* Cleverbot.io
 
 ## Planning
 - Week One
@@ -36,7 +31,8 @@ The user enters the app and is immediately able to start conversing with the cha
     - Setup the views
     - Setup front end to back end communication
   - Thursday August 9, 2018
-    - MongoDB and Superscript setup
+    - MongoDB setup
+    - Implement Chatbot
   - Friday August 10, 2018
     - Front end design and refining
   - Saturday August 11, 2018
