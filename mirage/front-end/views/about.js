@@ -5,7 +5,7 @@ export default class AboutPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
+        <Text>It just does</Text>
       </View>
     )
   }

@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class BotSelectPage extends React.Component {
+export default class IngredientPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Select a trained bot</Text>
+        <Text>What ingredients do you have?</Text>
       </View>
     )
   }

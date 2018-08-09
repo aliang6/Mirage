@@ -3,30 +3,31 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import LandingPage from './views/landing.js';
 import OptionsPage from './views/options.js';
-import FriendSelectPage from './views/friend-select.js';
-import BotSelectPage from './views/bot-select.js';
+import IngredientPage from './views/ingredients.js';
+import NamePage from './views/name.js';
 import ChatPage from './views/chat.js';
 import AboutPage from './views/about.js';
+import { Font } from 'expo';
 
-
-const nav = createStackNavigator({
-  Landing: { screen: LandingPage },
-  Options: { screen: OptionsPage },
-  FriendSelect: { screen: FriendSelectPage },
-  BotSelectPage: { screen: BotSelectPage },
-  Chat: { screen: ChatPage },
-  About: { screen: AboutPage },
-});
+const RootStack = createStackNavigator(
+  {
+    Landing: { screen: LandingPage },
+    Options: { screen: OptionsPage },
+    Ingredient: { screen: IngredientPage },
+    Name: { screen: NamePage },
+    Chat: { screen: ChatPage },
+    About: { screen: AboutPage },
+  },
+  {
+    initialRouteName: 'Landing',
+  }
+);
 
 export default class App extends React.Component {
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <Text>Test</Text>
-      </View>
+      <RootStack />
     );
   }
 }
