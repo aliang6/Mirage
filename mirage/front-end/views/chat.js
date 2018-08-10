@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, InputToolbar } from 'react-native-gifted-chat';
 
 /*var past_messages = '';
 
@@ -20,7 +20,7 @@ async function retrieveMessages() {
 
 export default class ChatPage extends React.Component {
   static navigationOptions = ({navigation}) => ({
-    title: 'Echo Chamber',
+    title: 'Mirage Chatbot',
   });
 
   state = {
@@ -64,13 +64,15 @@ export default class ChatPage extends React.Component {
   }
 
   componentWillUnmount() {
-    fetch('http://localhost:4000/api/save-messages', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ messages: this.state.messages}),
-    }).catch((err) => {
-      console.log(err);
-    });
+    if(this.state.messages.length !== 0){
+      fetch('http://localhost:4000/api/save-messages', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ messages: this.state.messages}),
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   }
 
   get user() {
@@ -114,12 +116,50 @@ export default class ChatPage extends React.Component {
     console.log(text); */
   }
 
-  
+  renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        textStyle={{
+          left: {
+            color: 'white'
+          },
+          right: {
+            color: 'white'
+          }
+        }}
+        wrapperStyle={{
+          left: {
+            backgroundColor: 'rgba(46, 204, 50, 0.4)'
+          },
+          right: {
+            backgroundColor: 'rgba(46, 204, 50, 0.85)'
+          }
+        }}
+      />
+    )
+  }
+
+  renderInputToolbar (props) {
+    //Add the extra styles via containerStyle
+    return (
+      <InputToolbar 
+        {...props} 
+        containerStyle={{
+            borderTopWidth: 3, 
+            borderTopColor: 'rgba(255, 255, 255, .3)',
+        }} 
+      />
+    )
+  }
   
   render() {
     return (
+      <View style={{backgroundColor: 'rgba(0, 0, 0, 0.8)', flex: 1}}>
       <GiftedChat
         key={this.id}
+        renderInputToolbar={this.renderInputToolbar}
+        renderBubble={this.renderBubble}
         messages={this.state.messages}
         onSend={(messages) => {
           this.onSend(messages);
@@ -131,6 +171,7 @@ export default class ChatPage extends React.Component {
         }}
         createdAt={new Date()}
       />
+      </View>
     )
   }
 }

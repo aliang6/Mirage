@@ -1,9 +1,16 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { 
+  StyleSheet, 
+  Image, 
+  Text, 
+  View 
+} from 'react-native';
 import { Font, Facebook } from 'expo';
+import Button from 'react-native-button';
 
 var app_id = '';
 var access_token = '';
+const background = require('../assets/img/art-artistic.jpg')
 
 async function fbLogin(app_id) {
   const { type, token } = await Facebook.logInWithReadPermissionsAsync(app_id, {
@@ -63,6 +70,7 @@ export default class LandingPage extends React.Component {
   async componentDidMount() {
     await Font.loadAsync({
       'raleway': require('../assets/fonts/raleway/Raleway-Regular.ttf'),
+      'lato': require('../assets/fonts/lato/Lato-Bold.ttf'),
     });
     this.setState({ fontLoaded: true });
   }
@@ -70,27 +78,40 @@ export default class LandingPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.componentText}>
-          {
-            this.state.fontLoaded ? 
-            <Text style={styles.landingText}>Mirage</Text> : null
-          }
-        </View>
-        <View style={styles.componentButton}>
-          <Button
-            title="Get Started"
-            onPress={() => {
-              // retrieveAppId();
-              // fbLogin();
-              this.props.navigation.navigate('Options')
-            }}
-            style={styles.landingButtons}
-          />
-          {/* <Button
-            title="How it works"
-            onPress={() => this.props.navigation.navigate('About')}
-            styles={styles.landingButtons}
+        <View style={styles.imageContainer}>
+          {/* <Image 
+            style={styles.image}
+            source={background}
+            blurRadius={1}
           /> */}
+          <View style={styles.overlay} />
+        </View>
+        <View style={styles.container}>
+          <View style={styles.componentText}>
+            {
+              this.state.fontLoaded ? 
+              <Text style={styles.landingText}>Mirage</Text> : null
+            }
+          </View>
+          <View style={styles.componentButton}>
+            {this.state.fontLoaded ? 
+            <Button
+              containerStyle={{ padding: 25, overflow:'hidden', borderRadius: 4, borderColor: 'rgba(46,204,50, 0.85)', backgroundColor: 'rgba(46,204,50, 0.4)'}}
+              onPress={() => {
+                // retrieveAppId();
+                // fbLogin();
+                this.props.navigation.navigate('Chat')
+              }}
+              style={styles.landingButtons}
+            >
+              Get Started
+            </Button> : null}
+            {/* <Button
+              title="How it works"
+              onPress={() => this.props.navigation.navigate('About')}
+              styles={styles.landingButtons}
+            /> */}
+          </View>
         </View>
       </View>
     );
@@ -100,28 +121,47 @@ export default class LandingPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+     backgroundColor: 'rgba(0, 0, 0, 0.8)'
+  },
+  image: {
+    flex: 1,
+    alignSelf: 'stretch',
+    width: undefined,
+    height: undefined,
+    resizeMode: 'cover',
   },
   componentText: {
     flex: 1,
-    alignItems: 'stretch',
     justifyContent: 'center',
-    backgroundColor: 'powderblue',
+
   },
   componentButton: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'skyblue',
   },
   landingButtons: {
-    fontSize: 36,
+    fontSize: 27,
+    //color: 'rgba(46,204,50, 0.85)',
+    color: 'rgba(255, 255, 255, 0.95)',
+    fontFamily: 'raleway'
   },
   landingText: {
     fontFamily: 'raleway',
-    fontSize: 72,
+    fontSize: 100,
+    color: 'rgba(255, 255, 255, 0.95)',
   }
 });
