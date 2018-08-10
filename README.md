@@ -1,6 +1,9 @@
 # Mirage
 Talk with a conversational chatbot
 
+## Experience
+The user enters the app and is immediately able to start conversing with the chatbot.
+
 # Technical
 ## Views
 - Home page
@@ -34,6 +37,6 @@ Talk with a conversational chatbot
     - MongoDB setup
     - Implement Chatbot
   - Friday August 10, 2018
-    - Front end design and refining
+    - Front end design
   - Saturday August 11, 2018
     - Demo
