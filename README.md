@@ -1,6 +1,9 @@
 # Mirage
 Talk with a conversational chatbot
 
+## Experience
+The user enters the app and is immediately able to start conversing with the chatbot.
+
 # Technical
 ## Views
 - Home page
