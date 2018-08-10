@@ -34,6 +34,6 @@ Talk with a conversational chatbot
     - MongoDB setup
     - Implement Chatbot
   - Friday August 10, 2018
-    - Front end design and refining
+    - Front end design
   - Saturday August 11, 2018
     - Demo
